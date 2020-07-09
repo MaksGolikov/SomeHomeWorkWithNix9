@@ -10,13 +10,14 @@ public class RetryUtil {
         int progression = 1;
         while (k < number) {
             try {
+                progression += 100;
                 System.out.print(k+")  ");
                 block.run();
             } catch (Exception e) {
                 LOGGER.warn("We have " + e +" \nMay be it is will fixed");
                 System.out.println("Now the function   " + BlockServiceImpl.class.getMethod("run").getName() + "   wants to try again");
                 Thread.sleep(progression);
-                progression += 500;
+
                 if (k < number - 1) {
                     repeat(number, block, ++k);
                 } else{
